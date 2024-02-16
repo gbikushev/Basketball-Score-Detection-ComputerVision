@@ -1,0 +1,17 @@
+
+# path: /users/micro/Desktop/Yolo/dataset # dataset root dir
+# train: images  # train images (relative to 'path')
+# val: images  # val images (relative to 'path')
+
+# # Classes
+# names:
+#   0: ball
+#   1: basket
+#   2: human
+
+path: /users/micro/Desktop/Yolo/ # dataset root dir
+train: data/train/images
+val: data/valid/images
+
+nc: 3
+names: ['ball', 'basket', 'human']
