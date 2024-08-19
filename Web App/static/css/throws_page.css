@@ -1,0 +1,125 @@
+.upload-container {
+    width: 90%;
+    max-width: 1000px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 80px;
+}
+
+.buttons-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+button {
+    padding: 10px;
+    background-color: rgb(250, 199, 70);
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Red "Delete" button styles */
+button.delete-button {
+    background-color: rgb(255, 80, 80);
+    color: white;
+    
+}
+
+button.delete-button:hover {
+    background-color: black;
+    color: white; 
+}
+
+.stats-container {
+    width: 100%;
+    max-height: 450px;
+    overflow: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+    white-space: nowrap;
+}
+
+.throws-text {
+    position: fixed;
+    top: 13%;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    font-size: 30px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    z-index: 2;
+}
+
+/* Progress bar container */
+#progressBarContainer {
+    width: 100%; /* Adjust width as needed */
+    background-color: white; /* Background color of the container */
+    border: 2px solid black; /* Border color and thickness */
+    height: 30px; /* Height of the progress bar */
+    margin-top: 20px; /* Space above the progress bar */
+    position: relative; /* Relative position to contain absolute positioning of progress text */
+    display: none; /* Initially hidden */
+    border-radius: 5px; /* Rounded corners for the container */
+    overflow: hidden; /* Ensure child elements do not overflow the rounded corners */
+}
+
+/* Progress bar */
+#progressBar {
+    height: 100%; /* Full height of the container */
+    background-color: rgb(140, 222, 103); /* Background color of the progress bar */
+    width: 0%; /* Initial width of the progress bar, updated dynamically */
+    border-radius: 5px; /* Rounded corners for the progress bar */
+}
+
+/* Progress text container */
+#progressTextContainer {
+    position: absolute; /* Absolute positioning within the progress bar container */
+    top: 50%; /* Center vertically within the container */
+    left: 50%; /* Center horizontally within the container */
+    transform: translate(-50%, -50%); /* Center the text container */
+    color: black; /* Text color */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center text inside the container */
+    width: auto; /* Adjust width if needed */
+    height: auto; /* Adjust height if needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}

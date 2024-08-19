@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/header.css">
+    <style>
+    /* Additional CSS for the text pages */
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    .content-container {
+        width: 1000px; /* Fixed width */
+        height: 520px; /* Fixed height */
+        margin: 20px auto;
+        padding: 20px;
+        padding-bottom: 20px; /* Adjust padding to avoid content overlap with buttons */
+        overflow: auto; /* Add scrollbar if content exceeds container height */
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative; /* Establish positioning context for child elements */
+    }
+
+    .text-page {
+        display: none;
+    }
+
+    .text-page.active {
+        display: block;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        position: absolute;
+        bottom: 10px; /* Position 10px from the bottom */
+        left: 20px;
+        right: 20px;
+    }
+
+    .nav-buttons button {
+        padding: 10px;
+        background-color: rgb(250, 199, 70);
+        color: black;
+        border: 2px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .nav-buttons button:hover {
+        background-color: black;
+        color: white;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left-buttons">
+            <button id="home-button">Home Page</button>
+            <button id="about-button">About</button>
+            <button id="developers-button">Developers</button>
+            <button id="blog-button">Blog</button>
+        </div>
+        <div class="right-buttons">
+            <div class="username-frame" id="username-frame">
+                <span id="username-display"></span>
+            </div>
+            <button id="login-button">Log In</button>
+            <button id="register-button">Register</button>
+            <button id="logout-button" style="display: none;">Log Out</button>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div id="page1" class="text-page active">
+            <h3>This web application was created by Gleb Bikushev, a student of MSc in Data Analytics in DkIT, as a part of Dissertation project “Computer Vision for Identification and Measurement of Basketball Scoring”.</h3>
+
+            <p><strong>Authentication:</strong></p>
+            <ul>
+                <li>Users can register on the web site using their username, email and password.</li>
+                <li>Users can log in to their account on the website using email and password.</li>
+            </ul>
+
+            <p><strong>Header:</strong></p>
+            <p>There are 4 buttons on the left side of the header that help users to navigate through the web app and describe in detail about its capabilities:</p>
+            <ul>
+                <li><strong>Home Page:</strong> this is the main page of the web app where all features are presented.</li>
+                <li><strong>About:</strong> this page describes in detail the functionality of the web app, what are the different buttons responsible for and video requirements for users.</li>
+                <li><strong>Developers:</strong> this page is intended mainly for developers where the details and features of the development of this application will be described (e.g., what framework and what type of database management system was used, etc.)</li>
+                <li><strong>Blog:</strong> this page contains the links to GitHub repository of this project and student’s LinkedIn.</li>
+            </ul>
+        </div>
+
+        <div id="page2" class="text-page">
+            <p><strong>Functionality:</strong></p>
+            <p>There are 3 tabs on the homepage users can access after logging in to their account:</p>
+            <ol>
+                <li><strong>Free Throws:</strong> on this page users can upload their videos of taking free throw shots to the server, where they are processed by a custom YOLOv8 deep learning model in combination with a unique algorithm for identifying successful shots. While the video is being uploaded and processed, users can track its progress (in %) on an informative progress bar. Users can also open the table with statistics of all uploaded free throws videos and observe the following information for each video:</li>
+            
+            
+                <table style="width:87%; border-collapse: collapse; margin-left: auto; margin-right: auto; font-size: 13px;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2; text-align: left;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Video Name</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Number of Throws</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Number of Goals</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Number of Misses</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Shooting Accuracy</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Upload Date</th>
+                        </tr>
+                    </thead>
+                </table>
+        
+                <p>The ability is enabled for users to open the uploaded video after processing by algorithms and see exactly how the calculation of the number of goals and shots is going. Also, users can delete uploaded videos from the list, and they will also be deleted on the server.</p>
+            </ol>
+
+            <ol start="2">
+                <li><strong>3-Point Throws:</strong> this page is similar to the Free Throws page but is designed for videos with three-point shots. These two types of shots are separated since scoring a 3-point shot is much more difficult than a free throw, making it more convenient to track shooting accuracy separately.</li>
+                <br>
+                <li><strong>Analyze:</strong> this page is an information panel created to help users better track their basketball shooting performance over a specified period through interactive visualization. The user can filter and view data based on different types of shots (Free Throws, 3-Point Throws, or All) and can choose the method of filtering data either by date range or number of recent videos. The visualization consists of:
+                    <ul>
+                        <li><strong>Bar chart (Total Goals and Misses):</strong> this bar chart displays the distribution of successful goals versus missed shots over the selected time period.</li>
+                        <li><strong>Line Chart (Shooting accuracy over time):</strong> this line chart tracks the accuracy of shots over the selected date range.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div id="page3" class="text-page">
+            <p><strong>Video Requirements:</strong></p>
+            <ol>
+                <li>The video must end with a frame of a person holding a ball.</li>
+                <li>During the throw, a person should not stand in front of the camera and obscure the visibility of the basketball hoop. This may lead to inaccurate results.</li>
+                <li>If there are several basketball hoops in the video, shots and goals will be counted in the largest hoop in the frame.</li>
+                <li>There must be a net on the basketball hoops throughout the video.</li>
+                <li>There must be only one ball throughout the video.</li>
+                <li>The color of the ball must be orange or at least close to it.</li>
+                <li>The environment in the video can be both indoors and outdoors.</li>
+                <li>The camera must be stationary throughout the entire video recording.</li>
+                <li>The camera can be positioned on the ground or mounted at some height using a tripod.</li>
+                <li>The camera must be in positions on the court marked with red dots (Picture 1).</li>
+            </ol>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="/static/images/court_schema.png" alt="Court Diagram" style="max-width: 70%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button id="back-button">Back</button>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for pagination
+        let currentPage = 1;
+        const totalPages = 3;
+
+        function showPage(page) {
+            document.querySelectorAll('.text-page').forEach((pageElement, index) => {
+                pageElement.classList.remove('active');
+                if (index + 1 === page) {
+                    pageElement.classList.add('active');
+                }
+            });
+        }
+
+        document.getElementById('next-button').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        // Initial page load
+        showPage(currentPage);
+    </script>
+    <script src="static/js/header.js"></script>
+</body>
+</html>

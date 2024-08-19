@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/header.css">
+    <style>
+    /* Additional CSS for the text pages */
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    .content-container {
+        width: 1000px; /* Fixed width */
+        height: 520px; /* Fixed height */
+        margin: 20px auto;
+        padding: 20px;
+        padding-bottom: 20px; /* Adjust padding to avoid content overlap with buttons */
+        overflow: auto; /* Add scrollbar if content exceeds container height */
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative; /* Establish positioning context for child elements */
+    }
+
+    .text-page {
+        display: none;
+    }
+
+    .text-page.active {
+        display: block;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        position: absolute;
+        bottom: 10px; /* Position 10px from the bottom */
+        left: 20px;
+        right: 20px;
+    }
+
+    .nav-buttons button {
+        padding: 10px;
+        background-color: rgb(250, 199, 70);
+        color: black;
+        border: 2px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .nav-buttons button:hover {
+        background-color: black;
+        color: white;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left-buttons">
+            <button id="home-button">Home Page</button>
+            <button id="about-button">About</button>
+            <button id="developers-button">Developers</button>
+            <button id="blog-button">Blog</button>
+        </div>
+        <div class="right-buttons">
+            <div class="username-frame" id="username-frame">
+                <span id="username-display"></span>
+            </div>
+            <button id="login-button">Log In</button>
+            <button id="register-button">Register</button>
+            <button id="logout-button" style="display: none;">Log Out</button>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <h3>This page is web app documentation for developers that describes application structure and main technologies used in it.</h3>
+        
+        <div class="nav-buttons">
+            <button id="back-button">Back</button>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for pagination
+        let currentPage = 1;
+        const totalPages = 3;
+
+        function showPage(page) {
+            document.querySelectorAll('.text-page').forEach((pageElement, index) => {
+                pageElement.classList.remove('active');
+                if (index + 1 === page) {
+                    pageElement.classList.add('active');
+                }
+            });
+        }
+
+        document.getElementById('next-button').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        // Initial page load
+        showPage(currentPage);
+    </script>
+    <script src="static/js/header.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: url('/static/images/background.png') no-repeat center center;
+    background-size: cover;
+    z-index: -2; /* Put the background image behind everything */
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity to darken */
+    z-index: -1; /* Put the overlay behind the content but above the background image */
+}
+form {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: border-color 0.3s;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #0066cc;
+}
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #218838;
+}
+.password-container {
+    position: relative;
+}
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}

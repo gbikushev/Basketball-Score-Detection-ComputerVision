@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball app</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/header.css">
+    <link rel="stylesheet" href="static/css/homepage.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="left-buttons">
+            <button id="home-button">Home Page</button>
+            <button id="about-button">About</button>
+            <button id="developers-button">Developers</button>
+            <button id="blog-button">Blog</button>
+        </div>
+        <div class="right-buttons">
+            <div class="username-frame" id="username-frame">
+                <span id="username-display"></span>
+            </div>
+            <button id="login-button">Log In</button>
+            <button id="register-button">Register</button>
+            <button id="logout-button" style="display: none;">Log Out</button>
+        </div>
+    </div>
+    <div class="images-container">
+        <div class="image-container">
+            <img src="/static/images/free_throws.png" class="basketball-image">
+            <button id="free-throws-button">Free Throws</button>
+        </div>
+        <div class="image-container">
+            <img src="/static/images/three_point_throws.png" class="basketball-image">
+            <button id="three-point-throws-button">3-Point Throws</button>
+        </div>
+        <div class="image-container">
+            <img src="/static/images/analyze.png" class="basketball-image">
+            <button id="analyze-button">Analyze</button>
+        </div>
+    </div>
+    <script src="static/js/header.js"></script>
+    <script src="static/js/homepage.js"></script>
+</body>
+</html>

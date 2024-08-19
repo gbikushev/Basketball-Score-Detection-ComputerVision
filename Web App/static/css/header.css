@@ -1,0 +1,98 @@
+/* Styles specifically for the header */
+.header {
+    width: 92%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); /* White background */
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0px; /* Adjust to create space for rounded corners */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.header .left-buttons button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: black;
+    background-color: rgb(140, 222, 103); /* Soft green color */
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.header .left-buttons button:hover {
+    background-color: black;
+    color: white;
+}
+.header .right-buttons {
+    display: flex;
+    align-items: center;
+}
+.header .right-buttons .username-frame {
+    display: none; /* Initially hidden */
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: black;
+    background-color: rgb(140, 222, 103); /* Soft green color */
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.header .right-buttons button#login-button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: black;
+    background-color: rgb(140, 222, 103); /* Soft green color */
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.header .right-buttons button#login-button:hover {
+    background-color: black;
+    color: white;
+}
+.header .right-buttons button#logout-button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white; /* Text color */
+    background-color: rgb(255, 80, 80); /* Red background */
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.header .right-buttons button#logout-button:hover {
+    background-color: black;
+}
+.right-buttons {
+    margin-right: 20px;
+}
+.header .right-buttons button#register-button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: black;
+    background-color: rgb(140, 222, 103); /* Soft green color */
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.header .right-buttons button#register-button:hover {
+    background-color: black;
+    color: white;
+}

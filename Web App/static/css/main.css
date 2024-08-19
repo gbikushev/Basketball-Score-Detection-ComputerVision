@@ -1,0 +1,34 @@
+/* General styles for the whole page */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: url('/static/images/background.png') no-repeat center center;
+    background-size: cover;
+    z-index: -2; /* Put the background image behind everything */
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity to darken */
+    z-index: -1; /* Put the overlay behind the content but above the background image */
+}

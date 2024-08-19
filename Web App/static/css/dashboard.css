@@ -1,0 +1,104 @@
+/* Existing CSS */
+body {
+    background-image: url('/static/images/background.png');
+    background-size: cover;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: url('/static/images/background.png') no-repeat center center;
+    background-size: cover;
+    z-index: -2; /* Put the background image behind everything */
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity to darken */
+    z-index: -1; /* Put the overlay behind the content but above the background image */
+}
+
+.dashboard-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.dashboard-title {
+    font-size: 2.3em;
+    color: #333;
+    text-align: center;
+    width: 100%;
+}
+
+.header-container .btn-homepage {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.divider {
+    border-top: 1px solid #ccc;
+}
+
+.input-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Aligns label above DatePickerRange */
+}
+
+.label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px; /* Adds some space below the label */
+}
+
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.total-accuracy {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #28a745;
+    margin-top: 10px;
+}
+
+.graph-container {
+    margin-bottom: 20px;
+}
+
+.btn-homepage {
+    font-size: 1em;
+    padding: 10px 20px;
+}
+
+.main-container {
+    width: 85%;
+    margin: 0 auto;
+}
