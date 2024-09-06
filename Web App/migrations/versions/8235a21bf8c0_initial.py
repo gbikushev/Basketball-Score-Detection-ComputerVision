@@ -36,6 +36,16 @@ def upgrade() -> None:
         sa.Column('permissions', sa.JSON(), nullable=True),
         sa.PrimaryKeyConstraint('id')
     )
+
+    # Insert initial roles into the 'role' table
+    op.bulk_insert(role_table,
+        [
+            {'id': 1, 'name': 'user', 'permissions': None},
+            {'id': 2, 'name': 'admin', 'permissions': None},
+        ]
+    )
+
+    # Now create the 'user' table which references 'role'
     op.create_table('user',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('email', sa.String(), nullable=False),
@@ -51,6 +61,7 @@ def upgrade() -> None:
         sa.UniqueConstraint('email'),
         sa.UniqueConstraint('username')
     )
+
     op.create_table('video',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('name_video', sa.String(), nullable=False),
@@ -65,14 +76,6 @@ def upgrade() -> None:
         sa.Column('video_path', sa.String(), nullable=False),
         sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
         sa.PrimaryKeyConstraint('id')
-    )
-
-    # Insert initial roles into the 'role' table
-    op.bulk_insert(role_table,
-        [
-            {'id': 1, 'name': 'user', 'permissions': None},
-            {'id': 2, 'name': 'admin', 'permissions': None},
-        ]
     )
     # ### end Alembic commands ###
 
