@@ -20,7 +20,7 @@ COPY . .
 
 RUN chmod a+x docker/*.sh
 
-RUN alembic upgrade head
+RUN alembic upgrade HEAD
 
 # Set the command to run the app
 CMD gunicorn app:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
