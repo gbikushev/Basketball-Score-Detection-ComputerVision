@@ -42,10 +42,12 @@
         display: flex;
         justify-content: space-between;
         gap: 20px;
-        position: absolute;
-        bottom: 10px; /* Position 10px from the bottom */
-        left: 20px;
-        right: 20px;
+        position: sticky; /* Change from absolute to sticky */
+        bottom: 0; /* Stick to the bottom */
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0); /* Optional: Add a background to make the buttons visible over content */
+        padding: 10px;
     }
 
     .nav-buttons button {
@@ -62,6 +64,18 @@
     .nav-buttons button:hover {
         background-color: black;
         color: white;
+    }
+
+    code {
+        font-family: Consolas,"courier new";
+        color: rgb(74, 71, 72);
+        background-color: #f1f1f1;
+        padding: 2px;
+        font-size: 95%;
+    }
+
+    u { 
+        text-decoration: underline;
     }
 
     </style>
@@ -85,18 +99,469 @@
     </div>
 
     <div class="content-container">
-        <h3>This page is web app documentation for developers that describes application structure and main technologies used in it.</h3>
         
+        
+        <div id="page1" class="text-page active">
+            <h3>This page is web app documentation for developers that describes application structure, database architecture, API documentation, authentication strategy and the main technologies that were used in the creation of the application.</h3>
+
+            <p><strong>Technologies Used:</strong></p>
+            <p>FastAPI, SQLAlchemy, Pydantic, PostgreSQL</p>
+
+            <p><strong>Project Structure:</strong></p>
+            <p>All application functionality is located in the /src folder. It is divided into 3 services:</p>
+            <ol>
+                <li>Users Authentication</li>
+                <li>Video Processing</li>
+                <li>Python Dashboard</li>
+            </ol>
+            <pre>
+    <span style="font-weight: bold;">web app</span>
+    ├── <span style="font-weight: bold;">migrations/</span>  <span style="color: green;"># db alembic migrations</span>
+    ├── <span style="font-weight: bold;">public_html/</span>  <span style="color: green;"># html files</span>
+    │   └── about.html
+    │   └── blog.html
+    │   └── developers.html
+    │   └── free_throws.html
+    │   └── homepage.html
+    │   └── login.html
+    │   └── register.html
+    │   └── three_point_throws.html
+    ├── <span style="font-weight: bold;">result_videos/</span>  <span style="color: green;"># for storing resulting videos after uploading and processing</span>
+    ├── <span style="font-weight: bold;">src/</span>   
+    │   ├── <span style="font-weight: bold;">auth/</span>  <span style="color: green;"># authentication service</span>
+    │   │   ├── base_config.py  <span style="color: green;"># auth configuration file</span> 
+    │   │   ├── manager.py  <span style="color: green;"># user manager</span>
+    │   │   ├── models.py  <span style="color: green;"># db models</span>
+    │   │   ├── schemas.py   <span style="color: green;"># pydantic models</span>
+    │   │   ├── utils.py  <span style="color: green;"># utilities</span>
+    │   ├── <span style="font-weight: bold;">dashboard/</span>  <span style="color: green;"># building python dashboard</span>
+    │   │   ├── dashboard.py  <span style="color: green;"># Dash App</span>
+    │   └── <span style="font-weight: bold;">process_video/</span>  <span style="color: green;"># service for video processing</span>
+    │   │   ├── classes.py  <span style="color: green;"># classes for video processing</span>
+    │   │   ├── connection_manager.py  <span style="color: green;"># websocket connection manager</span>
+    │   │   ├── functions.py  <span style="color: green;"># functions for video processing</span>
+    │   │   ├── models.py  <span style="color: green;"># db models</span>
+    │   │   ├── router_videos.py  <span style="color: green;"># router stores endpoints for video processing</span>
+    │   │   ├── video_func.py  <span style="color: green;"># functions for extracting info from video</span>
+    │   ├── __init__.py
+    │   ├── config.py  <span style="color: green;"># global configs</span>
+    │   ├── database.py  <span style="color: green;"># db connection related stuff</span>
+    ├── <span style="font-weight: bold;">static/</span>
+    │   ├── <span style="font-weight: bold;">css/</span>  <span style="color: green;"># css files</span>
+    │   │   ├── dashboard.css
+    │   │   ├── header.css
+    │   │   ├── homepage.css
+    │   │   ├── login.css
+    │   │   ├── main.css
+    │   │   ├── register.css
+    │   │   ├── throws_page.css
+    │   ├── <span style="font-weight: bold;">images/</span>
+    │   ├── <span style="font-weight: bold;">js/</span>  <span style="color: green;"># js files</span>
+    │   │   ├── header.js
+    │   │   ├── homepage.js
+    │   │   ├── login.js
+    │   │   ├── register.js
+    ├── <span style="font-weight: bold;">videos/</span>  <span style="color: green;"># videos for testing</span>
+    ├── .env  <span style="color: green;"># environment variables</span>
+    ├── alembic.ini
+    ├── app.py  <span style="color: green;"># main file</span>
+    ├── best.pt  <span style="color: green;"># YOLO model</span>
+    └── requirements.txt  <span style="color: green;"># requirements</span>
+            </pre>
+        </div>
+        <div id="page2" class="text-page">
+
+            <h3>Database</h3>
+            <p>I use PostgreSQL database management system in combination with Alembic (the database migration tool for Python) and SQLAlchemy (the Python SQL toolkit and Object-Relational Mapping (ORM) library).</p>
+            <p>Alembic helps manage changes to the database schema over time, allowing developers to apply, track, and undo schema changes in a systematic and version-controlled manner.</p>
+            <p>SQLAlchemy provides tools for interacting with databases in a more Pythonic way, abstracting much of the template code that would otherwise be required for executing SQL queries and managing database schemas.</p>
+            
+            <h4>Tables</h4>
+            <pre>
+1) <span style="font-weight: bold;">“alembic_version”</span>: this table is used to store the current version of the database schema.
+Columns:
+- <span style="font-style: italic;">version_num</span> (Primary Key, type: character varying (32)): column stores a unique identifier that represents the
+  specific migration version.
+<br>
+2) <span style="font-weight: bold;">“role”</span>: this table defines the different types of roles available in the role-based access control system of users
+   for the web application.
+Columns:
+- <span style="font-style: italic;">id</span> (Primary Key, type: integer): column uniquely identifies each role, serving as the primary key.
+- <span style="font-style: italic;">name</span> (type: varchar): stores the name of the role, such as 'user' or 'admin'.
+- <span style="font-style: italic;">permission</span> (type: json): stores a JSON object that defines specific permissions associated with the role.
+<br>
+3) <span style="font-weight: bold;">“user”</span>: this table manages user information for the web application.
+Columns:
+- <span style="font-style: italic;">id</span> (Primary Key, type: integer): a unique identifier for each user in the table.
+- <span style="font-style: italic;">email</span> (type: character varying): stores the email address of the user.
+- <span style="font-style: italic;">username</span> (type: character varying): stores the username chosen by the user.
+- <span style="font-style: italic;">registered_at</span> (type: timestamp without time zone): records the date and time when the user registered.
+- <span style="font-style: italic;">role_id</span> (Foreign Key, type: integer): references the `id` column in the "role" table, linking each user to a specific
+  role.
+- <span style="font-style: italic;">hashed_password</span> (type: character varying): stores the hashed version of the user's password.
+- <span style="font-style: italic;">is_active</span> (type: boolean): indicates whether the user's account is active.
+- <span style="font-style: italic;">is_superuser</span> (type: boolean): determines whether the user has superuser privileges.
+- <span style="font-style: italic;">is_verified</span> (type: boolean): indicates whether the user's email has been verified.
+<br>
+4) <span style="font-weight: bold;">“video”</span>: stores information about uploaded videos, including performance statistics.
+Columns:
+- <span style="font-style: italic;">id</span> (Primary Key, type: integer): a unique identifier for each video.
+- <span style="font-style: italic;">name_video</span> (type: character varying): the name of the uploaded video.
+- <span style="font-style: italic;">video_size</span> (type: integer): the size of the video in bytes.
+- <span style="font-style: italic;">number_throws</span> (type: integer): the number of basketball shots made in the video.
+- <span style="font-style: italic;">number_goals</span> (type: integer): the number of successful basketball shots.
+- <span style="font-style: italic;">number_misses</span> (type: integer): the number of missed basketball shots.
+- <span style="font-style: italic;">accuracy</span> (type: integer): the total basketball shooting accuracy.
+- <span style="font-style: italic;">throw_type</span> (type: integer): the type of basketball shots in the video.
+- <span style="font-style: italic;">date_upload</span> (type: integer): records the date and time when the video was uploaded.
+- <span style="font-style: italic;">user_id</span> (Foreign Key, type: integer): references the `id` column in the "user" table.
+- <span style="font-style: italic;">video_path</span> (type: character varying): the path where all uploaded videos are stored.
+            </pre>
+
+        </div>
+        <div id="page3", class="text-page">
+            <h3>API documentation</h3>
+            <h4>Interactive API Docs</h4>
+            <p>This application provides automatically generated interactive API documentation, accessible through the following paths:</p>
+            <ul>
+                <li><span style="font-weight: bold;">Swagger UI</span>: Available at /docs, this interface allows users to interact with the API endpoints directly from the browser. It provides a user-friendly way to explore the API, send requests, and view responses.</li>
+                <li><span style="font-weight: bold;">ReDoc</span>: Available at /redoc, this interface offers a more detailed and structured view of the API documentation. </li>
+            </ul>
+            <h4>Endpoint Overview</h4>
+            <p>The API is divided into different groups based on functionality:</p>
+            <p><span style="font-weight: bold;">1. General Routes</span></p>
+            <ul style="list-style-type:disc;">
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/dashboard-redirect</span> (GET): Redirect to Dash App with transferring Cookies. Authentication is required (JWT). 
+                    <br><u>Common errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 401</span> (Unauthorized if JWT token is missing or invalid)</li>
+                    </ul>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/free-throws</span> (GET): Get Free Throws Page (free_throws.html)</li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/three-point-throws</span> (GET): Get Three Point Throws Page (three_point_throws.html)</li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/register</span> (GET): Get Registration Page (register.html)</li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/login</span> (GET): Get Login Page (login.html)</li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/homepage</span> (GET): Get Home Page (homepage.html)</li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/about</span> (GET): Get About Page (about.html)</li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/developers</span> (GET): Get Developers Page (developers.html)</li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/blog</span> (GET): Get Blog Page (blog.html)</li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/protected-route</span> (GET): Return username of the current user. Authentication is required (JWT).
+                    <br><u>Common errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 401</span> (Unauthorized if JWT token is missing or invalid)</li>
+                    </ul>
+            </ul> 
+
+            <p><span style="font-weight: bold;">2. Authentication Routes</span></p>
+            <ul style="list-style-type:disc;">
+                <li><span style="color: rgb(25, 126, 43); font-weight: bold;">/auth/jwt/login</span> (POST): Authenticates a user, giving a JWT token.
+                    <br><u>Request Body:</u><br>
+                    <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                        {<br>
+                        <span style="padding-left: 20px;">"username": "user@example.com",</span><br>
+                        <span style="padding-left: 20px;">"password": "string"</span><br>
+                        }<br>
+                    </code>
+                    <br><u>Successful Response:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 204</span> (No Content)</li>
+                    </ul>
+                    <br><u>Common errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 400</span> (Error: Bad Request, if user with such username and password is not found in the database):</li>
+                        <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                            {<br>
+                            <span style="padding-left: 20px;">"detail": "LOGIN_BAD_CREDENTIALS"</span><br>
+                            }<br>
+                        </code>
+                    </ul>
+
+               
+                </li>
+                <br>
+                <li><span style="color: rgb(25, 126, 43); font-weight: bold;">/auth/jwt/logout</span> (POST): User logout using JWT. Authentication is required (JWT).
+                    <br><u>Successful Response:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 204</span> (No Content)</li>
+                    </ul>
+                    <br><u>Common errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 401</span> (Error: Unauthorized, if user is not authorized):</li>
+                        <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                            {<br>
+                            <span style="padding-left: 20px;">"detail": "Unauthorized"</span><br>
+                            }<br>
+                        </code>
+                    </ul>
+                </li>
+                <br>
+                <li><span style="color: rgb(25, 126, 43); font-weight: bold;">/auth/forgot-password</span> (POST): Request password reset (not used in my application).</li>
+                <br>
+                <li><span style="color: rgb(25, 126, 43); font-weight: bold;">/auth/reset-password</span> (POST): Reset password using a token (not used in my application).</li>
+                <br>
+                <li><span style="color: rgb(25, 126, 43); font-weight: bold;">/auth/register</span> (POST): Registers a new user.
+                    <br><u>Request Body:</u><br>
+                    <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                        {<br>
+                        <span style="padding-left: 20px;">"username": "string",</span><br>
+                        <span style="padding-left: 20px;">"email": "user@example.com",</span><br>
+                        <span style="padding-left: 20px;">"password": "string"</span><br>
+                        }<br>
+                    </code>
+                    <br><u>Successful Response:</u>
+                    <ul style="list-style-type:circle;">
+                    <li><span style="font-style: italic;">Code 201:</span></li>
+                        <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                            {<br>
+                            <span style="padding-left: 20px;">"id": 1,</span><br>
+                            <span style="padding-left: 20px;">"email": " user@example.com",</span><br>
+                            <span style="padding-left: 20px;">"is_active": true,</span><br>
+                            <span style="padding-left: 20px;">"is_superuser": false,</span><br>
+                            <span style="padding-left: 20px;">"is_verified": false,</span><br>
+                            <span style="padding-left: 20px;">"username": "string",</span><br>
+                            <span style="padding-left: 20px;">"role_id": 1</span><br>
+                            }<br>
+                        </code>
+                    </ul>
+                    <br><u>Common errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 400</span> (Error: Bad Request, if user already exists):</li>
+                        <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                            {<br>
+                            <span style="padding-left: 20px;">"detail": "REGISTER_USER_ALREADY_EXISTS"</span><br>
+                            }<br>
+                        </code>
+                    </ul>
+                </li>
+            </ul>
+            <p><span style="font-weight: bold;">3. Video Management Routes:</span></p>
+            <ul style="list-style-type:disc;">
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/videos/statistics/{throw_type}</span> (GET): Authenticates a user, giving a JWT token.
+                    <br><u>Path Parameters:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">throw_type (string):</li>
+                        <ul style="list-style-type:none;">
+                            <li>`free-throw`: for videos containing free throws.</li>
+                            <li>`three-point-throws`: for videos containing 3-point throws</li>
+                            <li>`all`: for videos containing both types of throws</li>
+                        </ul>
+                    </ul>
+                    <br><u>Successful Response</u> (Example: throw_type = free-throws):
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 200:</span></li>
+                        <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                            [<br>
+                            <span style="padding-left: 20px;">{</span><br>
+                                <span style="padding-left: 30px;">"id": 11,</span><br>
+                                <span style="padding-left: 30px;">"name_video": "yarik_tripid_throws_1.mp4",</span><br>
+                                <span style="padding-left: 30px;">"video_size": 1125993,</span><br>
+                                <span style="padding-left: 30px;">"number_throws": 2,</span><br>
+                                <span style="padding-left: 30px;">"number_goals": 0,</span><br>
+                                <span style="padding-left: 30px;">"number_misses": 2,</span><br>
+                                <span style="padding-left: 30px;">"accuracy": 0,</span><br>
+                                <span style="padding-left: 30px;">"throw_type": "free-throws",</span><br>
+                                <span style="padding-left: 30px;">"date_upload": "2024-07-29T23:17:29.468100",</span><br>
+                                <span style="padding-left: 30px;">"user_id": 1,</span><br>
+                                <span style="padding-left: 30px;">"video_path": "result_videos\\result_yarik_tripid_throws_1.mp4"</span><br>
+                            <span style="padding-left: 20px;">},</span><br>
+                            <span style="padding-left: 20px;">{</span><br>
+                                <span style="padding-left: 30px;">"id": 12,</span><br>
+                                <span style="padding-left: 30px;">"name_video": "yarik_tripid_throws_2.mp4",</span><br>
+                                <span style="padding-left: 30px;">"video_size": 1663929,</span><br>
+                                <span style="padding-left: 30px;">"number_throws": 1,</span><br>
+                                <span style="padding-left: 30px;">"number_goals": 1,</span><br>
+                                <span style="padding-left: 30px;">"number_misses": 0,</span><br>
+                                <span style="padding-left: 30px;">"accuracy": 100,</span><br>
+                                <span style="padding-left: 30px;">"throw_type": "free-throws",</span><br>
+                                <span style="padding-left: 30px;">"date_upload": "2024-07-29T23:38:40.071928",</span><br>
+                                <span style="padding-left: 30px;">"user_id": 1,</span><br>
+                                <span style="padding-left: 30px;">"video_path": "result_videos\\result_yarik_tripid_throws_2.mp4"</span><br>
+                            <span style="padding-left: 20px;">},</span><br>
+                          ]<br>
+                        </code>
+                    </ul>
+                    <br><u>Common Errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 401</span> (Error: Unauthorized, if user is not authorized):</li>
+                        <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                            {<br>
+                            <span style="padding-left: 20px;">"detail": "Unauthorized"</span><br>
+                            }<br>
+                        </code>
+                    </ul>
+                </li>
+                <br>
+                <li><span style="color: rgb(25, 126, 43); font-weight: bold;">/videos/upload_video_endpoint/{throw_type}</span> (POST): Upload video on the platform and start video processing. Authentication is required (JWT).
+                    <br><u>Path Parameters:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">throw_type (string):</li>
+                        <ul style="list-style-type:none;">
+                            <li>`free-throw`: for videos containing free throws.</li>
+                            <li>`three-point-throws`: for videos containing 3-point throws</li>
+                            <li>`all`: for videos containing both types of throws</li>
+                        </ul>
+                    </ul>
+                    <br><u>Successful Response</u> (Example: throw_type = free-throws):
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 200:</span></li>
+                            <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                {<br>
+                                <span style="padding-left: 20px;">"success": true,</span><br>
+                                <span style="padding-left: 20px;">"message": "Video processing started",</span><br>
+                                <span style="padding-left: 20px;">"task_id": "256b09dc-93e5-4ecf-9b56-42fa95503d20"</span><br>
+                                }<br>
+                            </code>
+                    </ul>
+                    <br><u>Common Errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 400</span> (Error: Bad Request, if user chooses file not in .mp4 format):</li>
+                        <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                            {<br>
+                                <span style="padding-left: 20px;">"detail": "Invalid file format. Acceptable format .mp4"</span><br>
+                            }<br>
+                        </code>
+                        <li><span style="font-style: italic;">Code 401</span> (Error: Unauthorized, if user is not authorized):</li>
+                        <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                            {<br>
+                            <span style="padding-left: 20px;">"detail": "Unauthorized"</span><br>
+                            }<br>
+                        </code>
+                    </ul>
+                </li>
+                <br>
+                <li><span style="color: rgb(70, 70, 174); font-weight: bold;">/videos/get_video_processing_results/{task_id}</span> (GET): Get results of a certain task of video processing, adds a new entry to the "video" table with retrieved shooting performance statistics. After getting the results, this task_id this value is permanently deleted. Authentication is required (JWT).
+                    <br><u>Path Parameters:</u>
+                        <ul style="list-style-type:circle;">
+                            <li><span style="font-style: italic;">task_id</span> (string): a previous endpoint starts the video processing task and returns the id of this task as a string.</li>
+                        </ul>
+                    <br><u>Successful Response</u> (Example: task_id = 256b09dc-93e5-4ecf-9b56-42fa95503d20):
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 200:</span></li>
+                            <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                {<br>
+                                <span style="padding-left: 20px;">"success": true,</span><br>
+                                <span style="padding-left: 20px;">"message": "Video processing completed",</span><br>
+                                <span style="padding-left: 20px;">"score": 1,</span><br>
+                                <span style="padding-left: 20px;">"misses": 0,</span><br>
+                                <span style="padding-left: 20px;">"throws": 1</span><br>
+                                }<br>
+                            </code>
+                    </ul>
+                    <br><u>Common Errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 404</span> (Error: Not Found, if the task_id is not found):</li>
+                            <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                {<br>
+                                <span style="padding-left: 20px;">"detail": "Task ID not found"</span><br>
+                                }<br>
+                            </code>
+                        <li><span style="font-style: italic;">Code 401</span> (Error: Unauthorized, if user is not authorized):</li>
+                            <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                {<br>
+                                <span style="padding-left: 20px;">"detail": "Unauthorized"</span><br>
+                                }<br>
+                            </code>
+                    </ul>
+                </li>
+                <br>
+                <li><span style="color: rgb(171, 22, 22); font-weight: bold;">/videos/delete_video/{video_path}</span> (DELETE): Delete a video from table “video” in the database and from the directory where all processed videos are stored.
+                    <br><u>Path Parameters:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">video_path</span> (string): the path to a directory within the project root folder where all the uploaded videos are stored.</li>
+                    </ul>
+                    <br><u>Successful Response</u> (Example: video_path = result_videos\result_yarik1.mp4):
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 200:</span></li>
+                            <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                {<br>
+                                <span style="padding-left: 20px;">"success": true</span><br>
+                                }<br>
+                            </code>
+                    </ul>
+                    <br><u>Common Errors:</u>
+                    <ul style="list-style-type:circle;">
+                        <li><span style="font-style: italic;">Code 404</span> (Error: Not Found, if the video_path is not found):</li>
+                            <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                {<br>
+                                <span style="padding-left: 20px;">"detail": "Video not found"</span><br>
+                                }<br>
+                            </code>
+                        <li><span style="font-style: italic;">Code 401</span> (Error: Unauthorized, if user is not authorized):</li>
+                            <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                {<br>
+                                <span style="padding-left: 20px;">"detail": "Unauthorized"</span><br>
+                                }<br>
+                            </code>
+                    </ul>
+                </li>
+                <br>
+                <li><span style="color: rgb(25, 126, 43); font-weight: bold;">/videos/stop_video_processing/{task_id}</span> (POST): Stop video processing task. At my application this endpoint is triggered when the user refreshes the page to reset the video processing task (For example, when the user finds out that he is uploading the wrong file).
+                    <br><u>Path Parameters:</u>
+                        <ul style="list-style-type:circle;">
+                            <li><span style="font-style: italic;">task_id</span> (string): id of the video processing task.</li>
+                        </ul>
+                    <br><u>Successful Response</u> (Example: task_id = e02bad05-ed31-472d-a0f8-aad83d3a336a):
+                        <ul style="list-style-type:circle;">
+                            <li><span style="font-style: italic;">Code 200:</span></li>
+                                <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                    {<br>
+                                    <span style="padding-left: 20px;">"success": true,</span><br>
+                                    <span style="padding-left: 20px;">"message": "Video processing stopped"</span><br>
+                                    }<br>
+                                </code>
+                        </ul>
+                    <br><u>Common Errors:</u>
+                        <ul style="list-style-type:circle;">
+                            <li><span style="font-style: italic;">Code 404</span> (Error: Not Found, if the task_id is not found):</li>
+                                <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                    {<br>
+                                    <span style="padding-left: 20px;">"detail": "Invalid task_id"</span><br>
+                                    }<br>
+                                </code>
+                            <li><span style="font-style: italic;">Code 401</span> (Error: Unauthorized, if user is not authorized):</li>
+                                <code style="display: block; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                    {<br>
+                                    <span style="padding-left: 20px;">"detail": "Unauthorized"</span><br>
+                                    }<br>
+                                </code>
+                        </ul>
+                </li>
+            </ul>             
+
+        </div>
+        <div id="page4", class="text-page">
+            <h3>Authentication</h3>
+            <h4>Overview</h4>
+            <p>In this web application, user authentication and management are handled using the fastapi-users python library. This library simplifies the integration of user authentication, including handling user registration, login, and password management, with built-in support for JWT (JSON Web Token) authentication.</p>
+            <h4>JWT Authentication Strategy</h4>
+            <p>The application utilizes JWT (JSON Web Tokens) for authenticating users. JWT is a compact and self-contained way for securely transmitting information between parties as a JSON object.</p>
+            <h4>How JWT Authentication Works</h4>
+            <p>When a user logs in through the /auth/jwt/login endpoint, their credentials (email/username and password) are verified. Upon successful authentication, the server generates a JWT token, which contains encoded information about the user, such as their ID, roles, and token expiration time. This JWT token stored in the cookie is automatically transmitted with every subsequent HTTP request from the client to the server such as API calls to fetch data, submit forms, or navigate to protected routes. This allows the server to verify the user's identity and permissions for each request.</p>
+            <p>The token is included in the header of HTTP requests, formatted as follows (example):</p>
+            <code>
+                cookie: basketball=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiYXVkIjpbImZhc3RhcGktdXNlcnM6YXV0aCJdLCJleHAiOjE3MjQyNTM0MDl9.<br>7W_5BlnIb1FVRHk6bqz8flCNKRlH8DaIEN8nHN3Vum0
+            </code>
+            <p>When the server receives a request, it checks the JWT token in the cookie to ensure that it is valid (e.g., not expired, correctly signed, etc.). If the token is valid, the server identifies the user and processes the request according to the user's permissions and roles. If the token is invalid or expired, the server will return an error response, typically a 401 Unauthorized status, prompting the user to log in again.</p>
+        </div>
+        <!-- Inserted content ends here -->
+
         <div class="nav-buttons">
             <button id="back-button">Back</button>
             <button id="next-button">Next</button>
         </div>
     </div>
-
     <script>
         // JavaScript for pagination
         let currentPage = 1;
-        const totalPages = 3;
+        const totalPages = 4;
 
         function showPage(page) {
             document.querySelectorAll('.text-page').forEach((pageElement, index) => {

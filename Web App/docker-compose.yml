@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:15
+    container_name: db_app
+    command: -p 5432
+    expose:
+      - 5432
+    env_file:
+      - .env-non-dev
+      
+
+  app:
+    build:
+      context: .
+    env_file:
+      - .env-non-dev
+    container_name: fastapi_app
+    command: ["/fastapi_app/docker/app.sh"]
+    ports:
+      - 9999:8000
+    depends_on:
+      - db

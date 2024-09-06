@@ -21,9 +21,9 @@
     margin: 0 5px;
     padding: 10px 20px;
     font-size: 16px;
-    color: black;
-    background-color: rgb(140, 222, 103); /* Soft green color */
-    border: 2px solid black;
+    color: white;
+    background-color: #198754; /* Soft green color */
+    border: 0px solid white;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
@@ -43,9 +43,9 @@
     margin-right: 20px;
     padding: 5px 10px;
     font-size: 16px;
-    color: black;
-    background-color: rgb(140, 222, 103); /* Soft green color */
-    border: 2px solid black;
+    color: white;
+    background-color: #198754; /* Soft green color */
+    border: 0px solid white;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -53,9 +53,9 @@
     margin: 0 5px;
     padding: 10px 20px;
     font-size: 16px;
-    color: black;
-    background-color: rgb(140, 222, 103); /* Soft green color */
-    border: 2px solid black;
+    color: white;
+    background-color: #198754; /* Soft green color */
+    border: 0px solid white;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
@@ -70,7 +70,7 @@
     font-size: 16px;
     color: white; /* Text color */
     background-color: rgb(255, 80, 80); /* Red background */
-    border: 2px solid black;
+    border: 0px solid white;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
@@ -85,9 +85,9 @@
     margin: 0 5px;
     padding: 10px 20px;
     font-size: 16px;
-    color: black;
-    background-color: rgb(140, 222, 103); /* Soft green color */
-    border: 2px solid black;
+    color: white;
+    background-color: #198754; /* Soft green color */
+    border: 0px solid white;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;

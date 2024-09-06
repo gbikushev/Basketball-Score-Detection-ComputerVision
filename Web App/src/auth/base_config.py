@@ -7,10 +7,10 @@ from src.auth.models import User
 from src.config import SECRET_AUTH
 
 # Default cookie transport
-cookie_transport = CookieTransport(cookie_name="bonds", cookie_max_age=3600)
+cookie_transport = CookieTransport(cookie_name="basketball", cookie_max_age=3600)
 
 # Extended cookie transport for processing
-extended_cookie_transport = CookieTransport(cookie_name="bonds", cookie_max_age=7200)
+extended_cookie_transport = CookieTransport(cookie_name="basketball", cookie_max_age=7200)
 
 
 def get_jwt_strategy(processing: bool = False) -> JWTStrategy:

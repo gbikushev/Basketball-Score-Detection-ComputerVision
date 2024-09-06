@@ -17,7 +17,6 @@ from src.auth.models import user as user_table
 from src.auth.base_config import current_user, get_jwt_strategy
 from src.process_video.connection_manager import ConnectionManager  # Import the ConnectionManager
 
-from converter import Converter
 
 manager = ConnectionManager()
 router = APIRouter(prefix="/videos", 
@@ -28,7 +27,6 @@ results_storage = {}
 
 # Global dictionary to hold stop events
 stop_events = {}
-
 
 @router.get("/statistics/{throw_type}")
 async def stat_all_video(throw_type: str, session: AsyncSession = Depends(get_async_session),
@@ -61,7 +59,7 @@ async def upload_video(throw_type: str, file: UploadFile = File(...), session: A
     response = JSONResponse(content={"success": True, "message": "Video processing started"})
 
     # Set the extended JWT token in the cookie
-    response.set_cookie(key="bonds", value=access_token, httponly=True, max_age=7200)
+    response.set_cookie(key="basketball", value=access_token, httponly=True, max_age=7200)
 
     # Create a dictionary to hold the results
     result_holder = {
@@ -167,12 +165,14 @@ async def delete_video(video_path: str, session: AsyncSession = Depends(get_asyn
         
 # Endpoint to stop the threads
 @router.post("/stop_video_processing/{task_id}")
-async def stop_video_processing(task_id: str):
+async def stop_video_processing(task_id: str, user: User = Depends(current_user)):
     if task_id in stop_events:
         stop_events[task_id].set()
+        results_storage.pop(task_id, None)
         return JSONResponse(content={"success": True, "message": "Video processing stopped"})
     else:
-        return JSONResponse(content={"success": False, "message": "Invalid task_id"})
+        raise HTTPException(status_code=404, detail="Invalid task_id")
+        
 
 
 @router.websocket("/ws")

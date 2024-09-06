@@ -42,10 +42,12 @@
         display: flex;
         justify-content: space-between;
         gap: 20px;
-        position: absolute;
-        bottom: 10px; /* Position 10px from the bottom */
-        left: 20px;
-        right: 20px;
+        position: sticky; /* Change from absolute to sticky */
+        bottom: 0; /* Stick to the bottom */
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0); /* Optional: Add a background to make the buttons visible over content */
+        padding: 10px;
     }
 
     .nav-buttons button {
@@ -102,6 +104,14 @@
                 <li><strong>Developers:</strong> this page is intended mainly for developers where the details and features of the development of this application will be described (e.g., what framework and what type of database management system was used, etc.)</li>
                 <li><strong>Blog:</strong> this page contains the links to GitHub repository of this project and student’s LinkedIn.</li>
             </ul>
+            <p>There are 3 buttons on the left side of the header that are responsible for users registration, logging in and out:</p>
+            <ul>
+                <li><strong>Register:</strong> redirects to the page with form for users registration on the platform.</li>
+                <li><strong>Log In:</strong> redirects to the page with form for users to log in on the platform.</li>
+                <li><strong>Log Out:</strong> performs user logout from the system and redirects to the page with form for users to log in on the platform.</li>
+            </ul>
+            <br> <br> 
+
         </div>
 
         <div id="page2" class="text-page">
@@ -132,11 +142,12 @@
                 <br>
                 <li><strong>Analyze:</strong> this page is an information panel created to help users better track their basketball shooting performance over a specified period through interactive visualization. The user can filter and view data based on different types of shots (Free Throws, 3-Point Throws, or All) and can choose the method of filtering data either by date range or number of recent videos. The visualization consists of:
                     <ul>
-                        <li><strong>Bar chart (Total Goals and Misses):</strong> this bar chart displays the distribution of successful goals versus missed shots over the selected time period.</li>
+                        <li><strong>Bar Chart (Total Goals and Misses):</strong> this bar chart displays the distribution of successful goals versus missed shots over the selected time period.</li>
                         <li><strong>Line Chart (Shooting accuracy over time):</strong> this line chart tracks the accuracy of shots over the selected date range.</li>
                     </ul>
                 </li>
             </ol>
+            <br> <br>
         </div>
 
         <div id="page3" class="text-page">

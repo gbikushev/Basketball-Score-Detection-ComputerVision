@@ -110,31 +110,6 @@ def toggle_filtering_method(filter_method):
         return {'display': 'none'}, {'display': 'block'}
     return {'display': 'block'}, {'display': 'none'}
 
-# Callback for updating total accuracy
-@dash_app.callback(
-    Output('total-accuracy', 'children'),
-    Input('video-type-1', 'value')
-)
-def update_total_accuracy(video_type):
-    # Get cookie value from request
-    cookie_value = request.cookies.get('bonds')
-
-    headers = {
-        'Cookie': f'bonds={cookie_value}'
-    }
-
-    response = requests.get(f"http://127.0.0.1:8000/videos/statistics/{video_type}", headers=headers)
-    data = response.json()
-
-    # Compute sums
-    sum_goals = sum(item['number_goals'] for item in data)
-    sum_misses = sum(item['number_misses'] for item in data)
-    total = sum_goals + sum_misses
-
-    # Calculate total accuracy percentage
-    total_accuracy = (sum_goals / total) * 100 if total > 0 else 0
-
-    return f"Total accuracy: {total_accuracy:.2f}%"
 
 # Callback for updating date-label
 @dash_app.callback(
@@ -154,10 +129,10 @@ def update_date_label(n_intervals):
 def update_date_range(video_type):
 
     # Get cookie value from request
-    cookie_value = request.cookies.get('bonds')
+    cookie_value = request.cookies.get('basketball')
 
     headers = {
-        'Cookie': f'bonds={cookie_value}'
+        'Cookie': f'basketball={cookie_value}'
     }
 
     response = requests.get(f"http://127.0.0.1:8000/videos/statistics/{video_type}", headers=headers)
@@ -191,10 +166,10 @@ def update_date_range(video_type):
 )
 def update_video_slider(video_type):
     # Get cookie value from request
-    cookie_value = request.cookies.get('bonds')
+    cookie_value = request.cookies.get('basketball')
 
     headers = {
-        'Cookie': f'bonds={cookie_value}'
+        'Cookie': f'basketball={cookie_value}'
     }
 
     response = requests.get(f"http://127.0.0.1:8000/videos/statistics/{video_type}", headers=headers)
@@ -230,10 +205,10 @@ def update_video_slider(video_type):
 )
 def update_charts(n_intervals, video_type, filter_method, start_date, end_date, slider_value):
     # Get cookie value from request
-    cookie_value = request.cookies.get('bonds')
+    cookie_value = request.cookies.get('basketball')
 
     headers = {
-        'Cookie': f'bonds={cookie_value}'
+        'Cookie': f'basketball={cookie_value}'
     }
 
     response = requests.get(f"http://127.0.0.1:8000/videos/statistics/{video_type}", headers=headers)

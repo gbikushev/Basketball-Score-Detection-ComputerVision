@@ -104,7 +104,7 @@ class PolygonZone:
             polygon=polygon, resolution_wh=(width + 1, height + 1)
         )
 
-    def trigger(self, detections: Detections, class_name):
+    def trigger(self, detections: Detections, class_id):
         """
         Determines if the spicific objects are within the polygon zone.
 
@@ -116,8 +116,7 @@ class PolygonZone:
         triggers = []
 
         for obj in iter(detections):
-
-            if obj[5].get('class_name') == class_name:
+            if obj[3] == class_id: # check for ball
                 obj_x1, obj_y1, obj_x2, obj_y2 = obj[0]
                 obj_p1 = (obj_x1, obj_y1)
                 obj_p2 = (obj_x2, obj_y2)
