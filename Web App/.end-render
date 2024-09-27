@@ -1,7 +1,8 @@
-DB_HOST=dpg-crdf98l2ng1s73fu2k50-a
+DB_HOST=dpg-crd500jqf0us73ase7pg-a
 DB_PORT=5432
-DB_NAME=postgres_test_ye1s
+DB_NAME=postgres_test_x7q6
 DB_USER=postgres_test
-DB_PASS=Ib0Ojtu2HCvawKe3Fg7HScijcF0xfaab
+DB_PASS=G9UFx1wIV3KglAJC2M0xPGFl9TcOKl6F
+
 
 SECRET_AUTH=e95a3684b9982fcfd46eea716707f80cef515906eb49c4cb961dfde39a41ce21
